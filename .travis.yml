@@ -25,7 +25,7 @@ matrix:
   fast_finish: true
 
 before_script:
-    - if [[ $COVERAGE = '1' ]]; then curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter && chmod +x ./cc-test-reporter && ./cc-test-reporter before-build
+    - if [[ $COVERAGE = '1' ]]; then curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter && chmod +x ./cc-test-reporter && ./cc-test-reporter before-build; fi
 
 before_install:
   - travis_retry composer self-update
@@ -37,5 +37,5 @@ install:
 script:
   - vendor/bin/phpunit
 
-after_success:
-  - if [[ $COVERAGE = 1 ]]; then ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT; fi
+# after_success:
+#   - if [[ $COVERAGE = 1 ]]; then ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT; fi
