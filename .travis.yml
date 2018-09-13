@@ -24,6 +24,8 @@ matrix:
       env: COVERAGE=1 LARAVEL='5.7.*'
   fast_finish: true
 
+before_script:
+    - if [[ $COVERAGE = '1' ]]; then curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter && chmod +x ./cc-test-reporter && ./cc-test-reporter before-build
 
 before_install:
   - travis_retry composer self-update
@@ -34,3 +36,6 @@ install:
 
 script:
   - vendor/bin/phpunit
+
+after_success:
+  - if [[ $COVERAGE = 1 ]]; then ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT; fi
