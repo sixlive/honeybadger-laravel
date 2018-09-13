@@ -9,8 +9,8 @@ php:
 env:
   global:
     - setup=basic
+    - coverage=no
   matrix:
-    - laravel=5.5.*
     - laravel=5.6.*
     - laravel=5.7.*
     - laravel=dev-master
@@ -20,31 +20,15 @@ before_script:
   - if [[ $setup = 'basic' ]]; then travis_retry composer require "laravel/framework=${laravel}" --prefer-dist --no-interaction; fi
   - if [[ $setup = 'stable' ]]; then travis_retry composer require "laravel/framework=${laravel}" --prefer-dist --no-interaction --prefer-stable; fi
   - if [[ $setup = 'lowest' ]]; then travis_retry composer require "laravel/framework=${laravel}" --prefer-dist --no-interaction --prefer-lowest --prefer-stable; fi
-   - if [[ $setup = 'coverage' ]]; then travis_retry composer require "laravel/framework=${laravel}" --prefer-dist && ./codeclimate beforebuild fi
 
 script:
   - vendor/bin/phpunit
-
-after_script:
-  - if [[ $setup = 'coverage' ]]; then ./bin/codeclimate afterbuild; fi
 
 matrix:
   include:
     - php: 7.1
       env:
         - setup=lowest
-        - laravel=5.5.*
-    - php: 7.1
-      env:
-        - setup=basic
-        - laravel=5.5.*
-    - php: 7.1
-      env:
-        - setup=stable
-        - laravel=5.5.*
-    - php: 7.1
-      env:
-        - setup=lowest
         - laravel=5.6.*
     - php: 7.1
       env:
@@ -66,10 +50,6 @@ matrix:
       env:
         - setup=stable
         - laravel=5.7.*
-    - php: 7.1
-      env: setup=coverage laravel=5.7.*
   allow_failures:
     - env: laravel=dev-master
-    - env: setup=coverage laravel=5.7.*
-
   fast_finish: true
