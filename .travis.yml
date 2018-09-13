@@ -20,13 +20,13 @@ before_script:
   - if [[ $setup = 'basic' ]]; then travis_retry composer require "laravel/framework=${laravel}" --prefer-dist --no-interaction; fi
   - if [[ $setup = 'stable' ]]; then travis_retry composer require "laravel/framework=${laravel}" --prefer-dist --no-interaction --prefer-stable; fi
   - if [[ $setup = 'lowest' ]]; then travis_retry composer require "laravel/framework=${laravel}" --prefer-dist --no-interaction --prefer-lowest --prefer-stable; fi
-   - if [[ $setup = 'coverage' ]]; then travis_retry composer require "laravel/framework=${laravel}" --prefer-dist; ./codeclimate before-build fi
+   - if [[ $setup = 'coverage' ]]; then travis_retry composer require "laravel/framework=${laravel}" --prefer-dist; ./codeclimate beforebuild fi
 
 script:
   - vendor/bin/phpunit
 
 after_script:
-  - if [[ $setup = 'coverage' ]]; then ./bin/codeclimate after-build; fi
+  - if [[ $setup = 'coverage' ]]; then ./bin/codeclimate afterbuild; fi
 
 matrix:
   include:
@@ -67,9 +67,7 @@ matrix:
         - setup=stable
         - laravel=5.7.*
     - php: 7.1
-      env:
-        - setup=coverage
-        - laravel=5.7.*
+      env: setup=coverage laravel=5.7.*
   allow_failures:
     - env: laravel=dev-master
     - env: setup=coverage laravel=5.7.*
