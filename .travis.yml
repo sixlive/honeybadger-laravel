@@ -38,5 +38,5 @@ install:
 script:
   - vendor/bin/phpunit
 
-# after_success:
+after_success:
   - if [[ $COVERAGE = 1 ]]; then ./bin/codeclimate $TRAVIS_TEST_RESULT; fi
