@@ -23,7 +23,8 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/sixlive/honeybadger-php"
+            "url": "https://github.com/sixlive/honeybadger-php",
+            "no-api": true
         }
     ],
     "require": {
