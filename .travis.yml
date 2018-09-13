@@ -1,76 +1,36 @@
+cache:
+  directories:
+    - $HOME/.composer/cache
+
 language: php
-
-sudo: false
-
-php:
-  - 7.1
-  - 7.2
 
 env:
   global:
-    - setup=basic
-    - coverage=no
-  matrix:
-    - laravel=5.5.*
-    - laravel=5.6.*
-    - laravel=5.7.*
-    - laravel=dev-master
-
-before_script:
-  - composer config discard-changes true
-  - if [[ $setup = 'basic' ]]; then travis_retry composer require "laravel/framework=${laravel}" --prefer-dist --no-interaction; fi
-  - if [[ $setup = 'stable' ]]; then travis_retry composer require "laravel/framework=${laravel}" --prefer-dist --no-interaction --prefer-stable; fi
-  - if [[ $setup = 'lowest' ]]; then travis_retry composer require "laravel/framework=${laravel}" --prefer-dist --no-interaction --prefer-lowest --prefer-stable; fi
-  - if [[ $setup = 'coverage' ]]; then travis_retry composer require "laravel/framework=${laravel}" --prefer-dist --no-interaction && bin/codeclimate beforebuild; fi
-
-script:
-  - vendor/bin/phpunit
-
-after_script:
-    - if [[ $setup = 'coverage' ]]; then travis_retry bin/codeclimate afterbuild; fi
+    - COVERAGE=0
 
 matrix:
   include:
     - php: 7.1
-      env:
-        - setup=lowest
-        - laravel=5.5.*
+      env: LARAVEL='5.5.*'
     - php: 7.1
-      env:
-        - setup=basic
-        - laravel=5.5.*
+      env: LARAVEL='5.6.*'
     - php: 7.1
-      env:
-        - setup=stable
-        - laravel=5.5.*
-    - php: 7.1
-      env:
-        - setup=lowest
-        - laravel=5.6.*
-    - php: 7.1
-      env:
-        - setup=basic
-        - laravel=5.6.*
-    - php: 7.1
-      env:
-        - setup=stable
-        - laravel=5.6.*
-    - php: 7.1
-      env:
-        - setup=lowest
-        - laravel=5.7.*
-    - php: 7.1
-      env:
-        - setup=basic
-        - laravel=5.7.*
-    - php: 7.1
-      env:
-        - setup=stable
-        - laravel=5.7.*
-    - php: 7.1
-      env:
-        - setup=coverage
-        - laravel=5.7.*
-  allow_failures:
-    - env: laravel=dev-master
+      env: LARAVEL='5.7.*'
+    - php: 7.2
+      env: LARAVEL='5.5.*'
+    - php: 7.2
+      env: LARAVEL='5.6.*'
+    - php: 7.2
+      env: COVERAGE=1 LARAVEL='5.7.*'
   fast_finish: true
+
+
+before_install:
+  - travis_retry composer self-update
+  - travis_retry composer require "laravel/framework:${LARAVEL}" --no-interaction --no-update
+
+install:
+  - travis_retry composer install --prefer-dist --no-interaction --no-suggest
+
+script:
+  - vendor/bin/phpunit
