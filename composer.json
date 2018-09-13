@@ -20,16 +20,9 @@
             "role": "Developer"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/sixlive/honeybadger-php",
-            "no-api": true
-        }
-    ],
     "require": {
         "php": "^7.1|^7.2",
-        "honeybadger-io/honeybadger-php": "dev-lower-httpfoundation-version",
+        "honeybadger-io/honeybadger-php": "^1.1",
         "illuminate/console": "^5.5|^5.6|^5.7",
         "illuminate/support": "^5.5|^5.6|^5.7"
     },
