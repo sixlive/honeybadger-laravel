@@ -4,9 +4,9 @@
          backupStaticAttributes="false"
          colors="true"
          verbose="true"
-         convertErrorsToExceptions="true"
+         convertErrorsToExceptions="false"
          convertNoticesToExceptions="false"
-         convertWarningsToExceptions="true"
+         convertWarningsToExceptions="false"
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
