@@ -5,8 +5,8 @@
          colors="true"
          verbose="true"
          convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="false"
+         convertNoticesToExceptions="false"
+         convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
