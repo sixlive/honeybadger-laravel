@@ -5,7 +5,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- Drops Laravel 6 support, need new major version
+## [1.7.4] - 2019-10-01
+### Fixed
+- Route action and component for Lumen ([#42](https://github.com/honeybadger-io/honeybadger-laravel/pull/42))
+
+## [2.0.0] - 2019-09-23
+### Changed
+- Support for Laravel 6 ([#41](https://github.com/honeybadger-io/honeybadger-laravel/pull/41))
+
+## [1.7.3] - 2019-09-23
+### Changed
+- Drops Laravel 6 support, need new major version ([#40](https://github.com/honeybadger-io/honeybadger-laravel/pull/40))
 
 ## [1.7.2] - 2019-09-05
 ### Fixed
